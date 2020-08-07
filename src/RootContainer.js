@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-class RootContainer extends React.Component {
-	render() {
-		return (
+const RootContainer = ({ serviceUrl, entity }) => {
+	const [loading, setLoading] = useState(false);
+	const [data, setData] = useState([]);
+	useEffect(() => {
+		setLoading(true);
+		if (!fetch) fetch = window.fetch;
+		fetch(
+			`${serviceUrl}/service/lists/jaccard-index?ids=${entity.value}&type=${entity.class}`
+		)
+			.then(res => res.text())
+			.then(data => {
+				setLoading(false);
+				setData(data);
+			})
+			.catch(() => setLoading(false));
+	}, []);
+	return (
+		!loading &&
+		data.length && (
 			<div className="rootContainer">
 				<h1>Your Data Viz Here</h1>
 			</div>
-		);
-	}
-}
+		)
+	);
+};
 
 export default RootContainer;
