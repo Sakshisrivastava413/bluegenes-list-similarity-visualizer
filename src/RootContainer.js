@@ -18,12 +18,27 @@ const RootContainer = ({ serviceUrl, entity }) => {
 			.catch(() => setLoading(false));
 	}, []);
 	return (
-		!loading &&
-		data.length && (
-			<div className="rootContainer">
-				<h1>Your Data Viz Here</h1>
-			</div>
-		)
+		<div className="rootContainer">
+			<span className="chart-title">List Similarity Visualisation</span>
+			{!loading ? (
+				<div className="table">
+					<table className="table-container">
+						<tr>
+							<th className="name">Name</th>
+							<th className="value">Jaccard Value</th>
+						</tr>
+						{data.map(item => (
+							<tr key={item}>
+								<td>{Object.keys(item)}</td>
+								<td>{Object.values(item)}</td>
+							</tr>
+						))}
+					</table>
+				</div>
+			) : (
+				<h1>Loading</h1>
+			)}
+		</div>
 	);
 };
 

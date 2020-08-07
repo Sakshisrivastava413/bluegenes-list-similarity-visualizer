@@ -12,6 +12,44 @@
   // this is just an example class for root div element, you may modify or delete it as per your usecase
 	.rootContainer {
 		border: 1px solid black;
-		padding: 20px;
+    padding: 20px;
+    .chart-title {
+      font-weight: 300;
+      font-size: 24px;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      margin: 10px;
+    }
+    .table {
+      height: calc(100vh - 8rem);
+      width: calc(100vw - 11rem);
+      overflow-y: scroll;
+      margin: 10px auto;
+      .table-container {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        font-size: 18px;
+        .name {
+          width: 70%;
+        }
+        .value {
+          width: 30%;
+        }
+      } 
+      .table-container td, .table-container th {
+        border: 1px solid rgb(49, 49, 49);
+        padding: 8px;
+      }
+      .table-container th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #ddd;
+      }
+      .table-container td {
+        font-size: 17px;
+      }
+    }
 	}
 }
