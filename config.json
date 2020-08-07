@@ -1,8 +1,11 @@
 {
-  "accepts": ["id","ids"]  ,
-  "classes":
-    ["*"]
-  ,
+  "accepts": [
+    "id",
+    "ids"
+  ],
+  "classes": [
+    "*"
+  ],
   "columnMapping": {
     "Gene": {
       "id": "primaryIdentifier"
@@ -11,13 +14,13 @@
       "id": "primaryAccession"
     }
   },
-  "files" : {
-    "css" : "dist/style.css",
-    "js" : "dist/bundle.js"
+  "files": {
+    "css": "dist/style.css",
+    "js": "dist/bundle.js"
   },
-  "toolName" : {
-    "human" :"Bluegenes List Similarity Visualizer",
-    "cljs" :"bluegenesListSimilarityVisualizer"    
+  "toolName": {
+    "human": "Bluegenes List Similarity Visualizer",
+    "cljs": "bluegenesListSimilarityVisualizer"
   },
   "version": 2
 }
