@@ -12,7 +12,8 @@ const RootContainer = ({ serviceUrl, entity }) => {
 			.then(res => res.text())
 			.then(data => {
 				setLoading(false);
-				setData(data);
+				const response = JSON.parse(data);
+				setData(response.results);
 			})
 			.catch(() => setLoading(false));
 	}, []);
