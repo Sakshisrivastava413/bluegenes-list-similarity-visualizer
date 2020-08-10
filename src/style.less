@@ -21,11 +21,70 @@
       justify-content: center;
       margin: 10px;
     }
+    .filter-panel-root {
+      margin: auto;
+      text-align: center;
+      border: solid 1px black;
+      border-radius: 4px;
+      width: max-content;
+
+      .filter-panel-title {
+        margin-top: 10px;
+        font-size: 20px;
+        font-family: sans-serif;
+        text-align: center;
+      }
+      .filter-panel {
+        padding: 10px 30px 30px 30px;
+
+        .filter-container {
+          display: flex;
+          text-align: left;
+          font-size: 16px;
+          font-weight: 300;
+          font-family: sans-serif;
+          .jaccard-filter {
+            .filter-option {
+              display: flex;
+              justify-content: start;
+              padding-top: 10px;
+              font-size: 16px;
+              font-family: arial;
+
+              .option {
+                  padding: 8px 15px;
+                  margin-right: 15px;
+                  cursor: pointer;
+              }
+              .selected {
+                  border: 1.2px solid rgb(85, 137, 233);
+                  border-radius: 3px;
+                  background: rgb(85, 137, 233);
+                  color: white;
+              }
+              .not-selected {
+                border: 1.2px solid rgb(85, 137, 233);
+                border-radius: 3px;
+              }
+              input {
+                  display: none;
+              }
+              label {
+                  cursor: pointer;
+              }
+            }
+          }
+          .side {
+            margin-right: 50px;
+          }
+        }
+      }
+    }
     .table {
-      height: calc(100vh - 8rem);
+      height: calc(100vh - 17.5rem);
       width: calc(100vw - 11rem);
       overflow-y: scroll;
-      margin: 10px auto;
+      margin: 10px auto 30px auto;
       .table-container {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
@@ -45,7 +104,8 @@
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: #ddd;
+        background-color: rgb(22, 127, 248);
+        color: white;
       }
       .table-container td {
         font-size: 17px;
