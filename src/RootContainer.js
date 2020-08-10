@@ -4,10 +4,15 @@ const RootContainer = ({ serviceUrl, entity }) => {
 	const [loading, setLoading] = useState(false);
 	const [data, setData] = useState([]);
 	useEffect(() => {
+		const classObj = Object.values(entity);
+		queryData(0.0, classObj[0]);
+	}, []);
+
+	const queryData = (min, entity) => {
 		setLoading(true);
 		if (!fetch) fetch = window.fetch;
 		fetch(
-			`${serviceUrl}/service/lists/jaccard-index?ids=${entity.value}&type=${entity.class}`
+			`${serviceUrl}/service/lists/jaccard-index?ids=${entity.value}&type=${entity.class}&min=${min}`
 		)
 			.then(res => res.text())
 			.then(data => {
@@ -16,7 +21,8 @@ const RootContainer = ({ serviceUrl, entity }) => {
 				setData(response.results);
 			})
 			.catch(() => setLoading(false));
-	}, []);
+	};
+
 	return (
 		<div className="rootContainer">
 			<span className="chart-title">List Similarity Visualisation</span>
