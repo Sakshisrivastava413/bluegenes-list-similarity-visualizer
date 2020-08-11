@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FilterPanel from './FilterPanel';
+import Loading from './Loading';
 
 const RootContainer = ({ serviceUrl, entity }) => {
 	const [loading, setLoading] = useState(false);
@@ -11,8 +12,9 @@ const RootContainer = ({ serviceUrl, entity }) => {
 		const classObj = Object.values(entity);
 		const classList = Object.keys(entity);
 		setTypeList(classList);
-		setSelectedType(classList[0]);
-		queryData(selectedMinIndex, classObj[0]);
+
+		setSelectedType(classList.length && classList[0]);
+		queryData(selectedMinIndex, classList.length && classObj[0]);
 	}, []);
 
 	const queryData = (min, entity) => {
@@ -35,29 +37,37 @@ const RootContainer = ({ serviceUrl, entity }) => {
 			<span className="chart-title">List Similarity Visualisation</span>
 			{!loading ? (
 				<>
-					<div className="table">
-						<table className="table-container">
-							<tr>
-								<th className="name">Name</th>
-								<th className="value">Jaccard Value</th>
-							</tr>
-							{data.map(item => (
-								<tr key={item}>
-									<td>{Object.keys(item)}</td>
-									<td>{Object.values(item)}</td>
+					{data && data.length && typeList.length ? (
+						<div className="table">
+							<table className="table-container">
+								<tr>
+									<th className="name">Name</th>
+									<th className="value">Jaccard Value</th>
 								</tr>
-							))}
-						</table>
-					</div>
-					<FilterPanel
-						selectedMinIndex={selectedMinIndex}
-						typeList={typeList}
-						selectedType={selectedType}
-						changeMinIndex={e => setSelectedMinIndex(e.target.value)}
-					/>
+								{data.map(item => (
+									<tr key={item}>
+										<td>{Object.keys(item)}</td>
+										<td>{Object.values(item)}</td>
+									</tr>
+								))}
+							</table>
+						</div>
+					) : (
+						<div className="no-data">No Data Found!</div>
+					)}
+					{typeList.length ? (
+						<FilterPanel
+							selectedMinIndex={selectedMinIndex}
+							typeList={typeList}
+							selectedType={selectedType}
+							changeMinIndex={e => setSelectedMinIndex(e.target.value)}
+						/>
+					) : (
+						<></>
+					)}
 				</>
 			) : (
-				<h1>Loading</h1>
+				<Loading />
 			)}
 		</div>
 	);
