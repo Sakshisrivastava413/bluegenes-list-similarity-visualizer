@@ -4,7 +4,8 @@ const FilterPanel = ({
 	selectedMinIndex,
 	typeList,
 	selectedType,
-	changeMinIndex
+	changeMinIndex,
+	changeType
 }) => (
 	<div className="filter-panel-root">
 		<div className="filter-panel-title">Filter Panel</div>
@@ -40,7 +41,7 @@ const FilterPanel = ({
 						{typeList.map(term => (
 							<div
 								className={
-									selectedType === term
+									selectedType.class === term.class
 										? 'option selected'
 										: 'option not-selected'
 								}
@@ -48,11 +49,12 @@ const FilterPanel = ({
 							>
 								<input
 									type="radio"
-									id={term}
-									value={term}
-									checked={selectedType === term}
+									id={term.class}
+									value={JSON.stringify(term)}
+									onChange={changeType}
+									checked={selectedType.class === term.class}
 								/>
-								<label htmlFor={term}>{term}</label>
+								<label htmlFor={term.class}>{term.class}</label>
 							</div>
 						))}
 					</div>

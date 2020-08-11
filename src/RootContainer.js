@@ -7,14 +7,15 @@ const RootContainer = ({ serviceUrl, entity }) => {
 	const [data, setData] = useState([]);
 	const [selectedMinIndex, setSelectedMinIndex] = useState(0);
 	const [typeList, setTypeList] = useState([]);
-	const [selectedType, setSelectedType] = useState('');
+	const [selectedType, setSelectedType] = useState({});
+
 	useEffect(() => {
 		const classObj = Object.values(entity);
-		const classList = Object.keys(entity);
-		setTypeList(classList);
-
-		setSelectedType(classList.length && classList[0]);
-		queryData(selectedMinIndex, classList.length && classObj[0]);
+		setTypeList(classObj);
+		if (classObj.length) {
+			setSelectedType(classObj[0]);
+			queryData(selectedMinIndex, classObj[0]);
+		}
 	}, []);
 
 	const queryData = (min, entity) => {
@@ -30,6 +31,19 @@ const RootContainer = ({ serviceUrl, entity }) => {
 				setData(response.results);
 			})
 			.catch(() => setLoading(false));
+	};
+
+	const changeMinIndex = e => {
+		const { value } = e.target;
+		setSelectedMinIndex(value);
+		queryData(value, selectedType);
+	};
+
+	const changeType = e => {
+		const { value } = e.target;
+		const type = JSON.parse(value);
+		setSelectedType(type);
+		queryData(selectedMinIndex, type);
 	};
 
 	return (
@@ -60,7 +74,8 @@ const RootContainer = ({ serviceUrl, entity }) => {
 							selectedMinIndex={selectedMinIndex}
 							typeList={typeList}
 							selectedType={selectedType}
-							changeMinIndex={e => setSelectedMinIndex(e.target.value)}
+							changeMinIndex={changeMinIndex}
+							changeType={changeType}
 						/>
 					) : (
 						<></>
